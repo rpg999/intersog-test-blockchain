@@ -34,7 +34,7 @@ make run
     - Response body:
     ```
     {
-        "id": 3
+        "id": 1
     }
     ```
     
