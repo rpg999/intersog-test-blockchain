@@ -24,7 +24,7 @@ func main() {
 	}
 
 	// Start the server
-	log.Printf("Listen for requests at %q", address)
+	log.Printf("Listen for requests at %q, press Ctrl+C to stop webapp server", address)
 	if err := server.Serve(ln); err != nil {
 		log.Fatalf("HTTP fail serve on %q: %s", address, err)
 	}

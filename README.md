@@ -1,6 +1,25 @@
 # Test project
 
 This test code is designed to create a simple Restful API back end for basic blockchain management application.
+    
+### Checkout sources
+
+To get the latest stable version:
+```
+git clone https://github.com/rpg999/intersog-test-blockchain.git
+cd intersog-test-blockchain
+make init
+```
+
+### Build
+```
+make build
+```
+
+### Run Daemon
+```
+make run
+```
 
 ### API Description
 1. Create a blockchain 
@@ -77,19 +96,6 @@ This test code is designed to create a simple Restful API back end for basic blo
         ]
     }
     ```
-    
-### Build Specifications
-
-In order to download the necessary packages for the build, you need to run the command:
-```
-make init
-```
-
-To run the daemon, you need to call:
-```
-make run
-```
-
 
 
 
