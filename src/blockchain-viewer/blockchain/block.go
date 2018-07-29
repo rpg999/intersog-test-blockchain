@@ -1,15 +1,15 @@
 package blockchain
 
 import (
-	"time"
-	"fmt"
 	"crypto/rand"
+	"fmt"
 	"log"
+	"time"
 )
 
 func NewBlock() *Block {
 	return &Block{
-		ID: generateHash(),
+		ID:        generateHash(),
 		Timestamp: time.Now().Unix(),
 	}
 }

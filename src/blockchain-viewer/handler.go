@@ -1,12 +1,12 @@
 package main
 
 import (
+	"blockchain-viewer/blockchain"
 	"encoding/json"
 	"fmt"
-	"blockchain-viewer/blockchain"
+	"github.com/gorilla/mux"
 	"io/ioutil"
 	"net/http"
-	"github.com/gorilla/mux"
 	"strconv"
 )
 
@@ -134,7 +134,7 @@ func parseRequest(r *http.Request, dataType string) (interface{}, error) {
 }
 
 // jsonResponse add json content header and write data to the the response
-func jsonResponse(rw http.ResponseWriter, b []byte)  {
+func jsonResponse(rw http.ResponseWriter, b []byte) {
 	rw.Header().Set("Content-Type", "application/json")
 	rw.Write(b)
 }
