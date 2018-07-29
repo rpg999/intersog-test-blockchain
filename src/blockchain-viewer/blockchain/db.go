@@ -28,7 +28,7 @@ func (db *database) Get(id uint64) (Chain, bool) {
 }
 
 // Update update the chain with a specific id
-func (db *database) Update(id uint64, c Chain)  {
+func (db *database) Update(id uint64, c Chain) {
 	db.mu.Lock()
 	if _, found := db.table[id]; found {
 		db.table[id] = c
