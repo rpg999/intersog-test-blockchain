@@ -36,7 +36,7 @@ func handleChainShow(rw http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
 	idNum, err := strconv.Atoi(id)
 	if err != nil {
-		http.Error(rw, "Invalid ID", http.StatusBadRequest)
+		http.Error(rw, "Invalid Chain ID", http.StatusBadRequest)
 	}
 
 	chain, ok := blockchain.DB.Get(uint64(idNum))
@@ -59,7 +59,7 @@ func handleChainCreate(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	c := chain.(*blockchain.Chain)
-	chainId := blockchain.DB.Add(c)
+	chainId := blockchain.DB.Insert(*c)
 	resp := struct {
 		ID uint64 `json:"id"`
 	}{
@@ -74,7 +74,7 @@ func handleChainCreate(rw http.ResponseWriter, r *http.Request) {
 func handleChainList(rw http.ResponseWriter, r *http.Request) {
 	chains := blockchain.DB.GetAll()
 	resp := struct {
-		Chains []*blockchain.Chain `json:"chains"`
+		Chains []blockchain.Chain `json:"chains"`
 	}{
 		chains,
 	}
@@ -90,11 +90,10 @@ func handleChainList(rw http.ResponseWriter, r *http.Request) {
 
 // handleAddBlock add a new block to the chain with an given id
 func handleAddBlock(rw http.ResponseWriter, r *http.Request) {
-	// TODO remove code duplication from handleChainShow
 	id := mux.Vars(r)["id"]
 	idNum, err := strconv.Atoi(id)
 	if err != nil {
-		http.Error(rw, "Invalid ID", http.StatusBadRequest)
+		http.Error(rw, "Invalid Chain ID", http.StatusBadRequest)
 	}
 
 	chain, ok := blockchain.DB.Get(uint64(idNum))
@@ -103,7 +102,9 @@ func handleAddBlock(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	chain.AddBlock()
+	chain.AddBlock(blockchain.NewBlock())
+	blockchain.DB.Update(uint64(idNum), chain)
+
 	b, _ := json.Marshal(chain)
 	jsonResponse(rw, b)
 }

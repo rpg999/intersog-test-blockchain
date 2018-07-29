@@ -18,11 +18,9 @@ type Chain struct {
 }
 
 // AddBlock add a new block to the chain
-func (c *Chain) AddBlock() {
+func (c *Chain) AddBlock(block *Block) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-
-	block := NewBlock()
 	c.Blocks = append(c.Blocks, block)
 }
 
