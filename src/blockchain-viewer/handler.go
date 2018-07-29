@@ -136,6 +136,7 @@ func parseRequest(r *http.Request, dataType string) (interface{}, error) {
 
 // jsonResponse add json content header and write data to the the response
 func jsonResponse(rw http.ResponseWriter, b []byte) {
+	rw.Header().Set("Access-Control-Allow-Origin", "*")
 	rw.Header().Set("Content-Type", "application/json")
 	rw.Write(b)
 }
