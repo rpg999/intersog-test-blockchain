@@ -37,3 +37,12 @@ func (c *Chain) UnmarshalJSON(b []byte) error {
 
 	return nil
 }
+
+// MarshalJSON concurency-safe JSON marshalling
+func (c *Chain) MarshalJSON() ([]byte, error) {
+	type Plain Chain
+	c.mu.RLock()
+	defer  c.mu.RUnlock()
+
+	return json.Marshal((*Plain)(c))
+}
