@@ -26,7 +26,7 @@ func newServerMux() *mux.Router {
 	r.HandleFunc("/api/chain/show/{id:[0-9]+}", http.HandlerFunc(handleChainShow)).Methods("GET")
 	r.HandleFunc("/api/chain/create", http.HandlerFunc(handleChainCreate)).Methods("POST")
 	r.HandleFunc("/api/chain/list", http.HandlerFunc(handleChainList)).Methods("GET")
-	r.HandleFunc("/api/chain/add-block/{id:[0-9]+}", http.HandlerFunc(handleAddBlock)).Methods("POST")
+	r.HandleFunc("/api/chain/{id:[0-9]+}/add-block", http.HandlerFunc(handleAddBlock)).Methods("POST")
 
 	return r
 }
